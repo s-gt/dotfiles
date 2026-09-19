@@ -1,0 +1,22 @@
+min_version = "2026.9.11"
+
+[bootstrap.packages]
+"apt:zsh" = "latest"
+"apt:tmux" = "latest"
+"apt:vim" = "latest"
+"apt:curl" = "latest"
+
+[dotfiles]
+"~/.zshrc" = ".zshrc"
+"~/.tmux.conf" = ".tmux.conf"
+"~/.vimrc" = ".vimrc"
+
+[tasks.bootstrap]
+description = "Install Starship with the official installer if missing"
+shell = "bash -c"
+run = '''
+set -o pipefail
+if ! command -v starship >/dev/null 2>&1; then
+    curl -sS https://starship.rs/install.sh | sh
+fi
+'''
